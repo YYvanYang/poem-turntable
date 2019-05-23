@@ -4,7 +4,8 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Sunburst from 'components/Sunburst';
-import ContainedButtons from 'components/ContainedButtons';
+// import ContainedButtons from 'components/ContainedButtons';
+import TurnButton from 'components/TurnButton';
 import LinearIndeterminate from 'components/LinearIndeterminate';
 import Snackbar from 'components/Snackbar'
 import { useInterval } from 'Hooks/useInterval';
@@ -65,7 +66,7 @@ function App() {
           css={{ transform: 'translate(-50%, -50%)' }}
           zIndex="modal"
         >
-          <ContainedButtons execute={execute} />
+          <TurnButton execute={execute} />
         </Box>
 
         <Box

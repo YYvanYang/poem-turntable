@@ -1,0 +1,13 @@
+button.spinning {
+  box-shadow: none;
+  animation: rotate-s-loader 4s linear infinite;
+}
+
+@keyframes rotate-s-loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
