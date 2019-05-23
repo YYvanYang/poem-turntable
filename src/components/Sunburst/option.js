@@ -132,6 +132,7 @@ export function getOption(params) {
         type: 'sunburst',
         center: ['50%', '50%'],
         data: data,
+        nodeClick: false,
         sort: function(a, b) {
 
           if (a.depth === 1) {
