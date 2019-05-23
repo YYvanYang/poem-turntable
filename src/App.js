@@ -15,7 +15,7 @@ function App() {
   const [duration, setDuration] = useState(null);
   const [count, setCount] = useState(1);
   const [open, setOpen] = useState(false);
-  const [msg, setMsg] = useState('');
+  const [msg, setMsg] = useState({});
 
   useInterval(() => {
     if (delay !== null && count % 10 === 0) {
@@ -39,9 +39,9 @@ function App() {
     setDelay(null);
     setDuration(null);
     const poem = getPoemById(String(index))
-    const author = `${poem.dynasty} ${poem.author}`
-    const message = `${poem.poem}(${author.trim()})`
-    setMsg(message)
+    // const author = `${poem.dynasty} ${poem.author}`
+    // const message = `${poem.poem}(${author.trim()})`
+    setMsg(poem)
     setOpen(true);
     // console.log('current index:', poem);
   }

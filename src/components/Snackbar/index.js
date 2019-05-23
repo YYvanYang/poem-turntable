@@ -12,59 +12,70 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
 import { makeStyles } from '@material-ui/core/styles';
-
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 const variantIcon = {
   success: CheckCircleIcon,
   warning: WarningIcon,
   error: ErrorIcon,
-  info: InfoIcon,
+  info: InfoIcon
 };
 
 const useStyles1 = makeStyles(theme => ({
   success: {
-    backgroundColor: green[600],
+    backgroundColor: green[600]
   },
   error: {
-    backgroundColor: theme.palette.error.dark,
+    backgroundColor: theme.palette.error.dark
   },
   info: {
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.primary.dark
   },
   warning: {
-    backgroundColor: amber[700],
+    backgroundColor: amber[700]
   },
   icon: {
-    fontSize: 20,
+    fontSize: 20
   },
   iconVariant: {
     opacity: 0.9,
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(1)
   },
   message: {
     display: 'flex',
-    alignItems: 'center',
-  },
+    alignItems: 'center'
+  }
 }));
 
 function MySnackbarContentWrapper(props) {
   const classes = useStyles1();
-  const { className, message, onClose, variant, ...other } = props;
+  const { className, msg, onClose, variant, ...other } = props;
   const Icon = variantIcon[variant];
-
+  const author = `${msg.dynasty} ${msg.author}`.trim();
   return (
     <SnackbarContent
       className={clsx(classes[variant], className)}
       aria-describedby="client-snackbar"
       message={
-        <span id="client-snackbar" className={classes.message}>
+        <Box id="client-snackbar" className={classes.message}>
           <Icon className={clsx(classes.icon, classes.iconVariant)} />
-          {message}
-        </span>
+          <Typography component="h5" variant="h5">
+            {msg.poem}
+          </Typography>
+          <Box mx="1rem">
+            <Typography variant="subtitle1">{author}</Typography>
+          </Box>
+        </Box>
       }
       action={[
-        <IconButton key="close" aria-label="Close" color="inherit" onClick={onClose}>
+        <IconButton
+          key="close"
+          aria-label="Close"
+          color="inherit"
+          onClick={onClose}
+        >
           <CloseIcon className={classes.icon} />
-        </IconButton>,
+        </IconButton>
       ]}
       {...other}
     />
@@ -75,10 +86,10 @@ MySnackbarContentWrapper.propTypes = {
   className: PropTypes.string,
   message: PropTypes.node,
   onClose: PropTypes.func,
-  variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired,
+  variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired
 };
 
-function CustomizedSnackbars({open,msg, onClose}) {
+function CustomizedSnackbars({ open, msg, onClose }) {
   // const [open, setOpen] = React.useState(false);
 
   // function handleClick() {
@@ -89,28 +100,25 @@ function CustomizedSnackbars({open,msg, onClose}) {
     if (reason === 'clickaway') {
       return;
     }
-    onClose()
+    onClose();
     // setOpen(false);
   }
 
   return (
-
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-        open={open}
+    <Snackbar
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'center'
+      }}
+      open={open}
+      onClose={handleClose}
+    >
+      <MySnackbarContentWrapper
         onClose={handleClose}
-      >
-        <MySnackbarContentWrapper
-          onClose={handleClose}
-          variant="success"
-          message={msg}
-        />
-      </Snackbar>
-
-
+        variant="success"
+        msg={msg}
+      />
+    </Snackbar>
   );
 }
 
