@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -7,9 +7,10 @@ import Sunburst from 'components/Sunburst';
 // import ContainedButtons from 'components/ContainedButtons';
 import TurnButton from 'components/TurnButton';
 import LinearIndeterminate from 'components/LinearIndeterminate';
-import Snackbar from 'components/Snackbar'
+import Snackbar from 'components/Snackbar';
 import { useInterval } from 'Hooks/useInterval';
 import { getPoemById } from 'utils/utils';
+import { initWxConfig, setShare } from 'Share/wx';
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -25,6 +26,11 @@ function App() {
   const [msg, setMsg] = useState({});
   const [randomInt, setRandomInt] = useState(getRandomInt(1, 76));
 
+  useEffect(() => {
+    initWxConfig();
+    setShare();
+  }, []);
+
   useInterval(() => {
     if (delay !== null && count % 10 === 0) {
       setDelay(delay + 10);
@@ -37,21 +43,20 @@ function App() {
   }, duration);
 
   function execute() {
-    setRandomInt(getRandomInt(1, 76))
+    setRandomInt(getRandomInt(1, 76));
     setOpen(false);
     setDelay(30);
     setDuration(500);
     setCount(1);
-
   }
 
   function stop(index) {
     setDelay(null);
     setDuration(null);
-    const poem = getPoemById(String(index))
+    const poem = getPoemById(String(index));
     // const author = `${poem.dynasty} ${poem.author}`
     // const message = `${poem.poem}(${author.trim()})`
-    setMsg(poem)
+    setMsg(poem);
     setOpen(true);
     // console.log('current index:', poem);
   }
@@ -93,10 +98,10 @@ function App() {
         </Box>
 
         <Container maxWidth="md">
-          <Sunburst delay={delay} onStop={stop} randomInt={randomInt}/>
+          <Sunburst delay={delay} onStop={stop} randomInt={randomInt} />
         </Container>
       </Typography>
-      <Snackbar open={open} msg={msg} onClose={close}/>
+      <Snackbar open={open} msg={msg} onClose={close} />
     </>
   );
 }
