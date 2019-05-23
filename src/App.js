@@ -11,12 +11,19 @@ import Snackbar from 'components/Snackbar'
 import { useInterval } from 'Hooks/useInterval';
 import { getPoemById } from 'utils/utils';
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //不含最大值，含最小值
+}
+
 function App() {
   const [delay, setDelay] = useState(null);
   const [duration, setDuration] = useState(null);
   const [count, setCount] = useState(1);
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState({});
+  const [randomInt, setRandomInt] = useState(getRandomInt(1, 76));
 
   useInterval(() => {
     if (delay !== null && count % 10 === 0) {
@@ -30,10 +37,12 @@ function App() {
   }, duration);
 
   function execute() {
+    setRandomInt(getRandomInt(1, 76))
     setOpen(false);
     setDelay(30);
     setDuration(500);
     setCount(1);
+
   }
 
   function stop(index) {
@@ -84,7 +93,7 @@ function App() {
         </Box>
 
         <Container maxWidth="md">
-          <Sunburst delay={delay} onStop={stop} />
+          <Sunburst delay={delay} onStop={stop} randomInt={randomInt}/>
         </Container>
       </Typography>
       <Snackbar open={open} msg={msg} onClose={close}/>
