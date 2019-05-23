@@ -39,7 +39,9 @@ function App() {
     setDelay(null);
     setDuration(null);
     const poem = getPoemById(String(index))
-    setMsg(poem)
+    const author = `${poem.dynasty} ${poem.author}`
+    const message = `${poem.poem}(${author.trim()})`
+    setMsg(message)
     setOpen(true);
     // console.log('current index:', poem);
   }
