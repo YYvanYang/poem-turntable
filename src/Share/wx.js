@@ -2,7 +2,6 @@ import img from 'poem-turntable.png';
 
 let currentUrl = window.location.href.split('#')[0];
 
-console.log('img:', img);
 const wx = window.wx;
 
 export function initWxConfig() {
@@ -18,6 +17,7 @@ export function initWxConfig() {
       signature: wxconfig.signature, // 必填，签名
       jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData'] // 必填，需要使用的JS接口列表
     });
+    setShare();
   });
 }
 
@@ -30,7 +30,7 @@ function getWxConfig(currentUrl) {
     //.then(response => response);
 }
 
-export function setShare() {
+function setShare() {
   wx.ready(function() {
     // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，
     // config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。

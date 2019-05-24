@@ -9,7 +9,7 @@ import LinearIndeterminate from 'components/LinearIndeterminate';
 import Snackbar from 'components/Snackbar';
 import { useInterval } from 'Hooks/useInterval';
 import { getPoemById } from 'utils/utils';
-import { initWxConfig, setShare } from 'Share/wx';
+// import { initWxConfig } from 'Share/wx';
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -25,10 +25,9 @@ function App() {
   const [msg, setMsg] = useState({});
   const [randomInt, setRandomInt] = useState(getRandomInt(1, 76));
 
-  useEffect(() => {
-    initWxConfig();
-    setShare();
-  }, []);
+  // useEffect(() => {
+  //   initWxConfig();
+  // }, []);
 
   useInterval(() => {
     if (delay !== null && count % 10 === 0) {
