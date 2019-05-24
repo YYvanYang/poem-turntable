@@ -14,8 +14,11 @@ const useStyles = makeStyles(theme => ({
 
 function ButtonSizes({execute}) {
   const classes = useStyles();
+  const date = new Date();
+  const day = date.getDate()
+  const color = day % 2 === 0 ? "primary" : "secondary"
   return (
-    <Fab size="large" onClick={execute} color="secondary" aria-label="转" className={`${classes.margin}`}>
+    <Fab size="large" onClick={execute} color={color} aria-label="转" className={`${classes.margin}`}>
       转
     </Fab>
   );

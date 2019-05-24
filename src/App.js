@@ -4,7 +4,6 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Sunburst from 'components/Sunburst';
-// import ContainedButtons from 'components/ContainedButtons';
 import TurnButton from 'components/TurnButton';
 import LinearIndeterminate from 'components/LinearIndeterminate';
 import Snackbar from 'components/Snackbar';
@@ -54,11 +53,8 @@ function App() {
     setDelay(null);
     setDuration(null);
     const poem = getPoemById(String(index));
-    // const author = `${poem.dynasty} ${poem.author}`
-    // const message = `${poem.poem}(${author.trim()})`
     setMsg(poem);
     setOpen(true);
-    // console.log('current index:', poem);
   }
 
   function close() {
