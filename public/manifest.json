@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Poem Turntable",
+  "name": "古诗大转盘",
   "icons": [
     {
       "src": "favicon.ico",
