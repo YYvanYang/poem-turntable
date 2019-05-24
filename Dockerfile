@@ -5,16 +5,16 @@ FROM node:alpine AS build
 # Create app directory
 WORKDIR /usr/src/app
 
-#
-COPY package*.json ./
+# https://github.com/yarnpkg/yarn/issues/749
+COPY package.json yarn.lock ./
 
 # install ALL node_modules, including 'devDependencies'
-RUN npm install
+RUN yarn install --frozen-lockfile --no-cache
 
 # Bundle app source
 COPY . .
 
-RUN npm run build
+RUN yarn build
 
 #
 # ---- Release ----
