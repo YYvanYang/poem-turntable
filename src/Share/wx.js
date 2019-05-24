@@ -1,4 +1,4 @@
-import img from './poem-turntable.png';
+import img from 'poem-turntable.png';
 
 let currentUrl = window.location.href.split('#')[0];
 
@@ -6,9 +6,10 @@ console.log('img:', img);
 const wx = window.wx;
 
 export function initWxConfig() {
-  getWxConfig(currentUrl).then(res => {
-    let wxconfig = res.data;
-    alert(JSON.stringify(wxconfig));
+  getWxConfig(currentUrl).then(wxconfig => {
+    // debugger;
+    // let wxconfig = res.data;
+    // alert(JSON.stringify(wxconfig));
     wx.config({
       debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
       appId: wxconfig.appId, // 必填，公众号的唯一标识
@@ -22,11 +23,11 @@ export function initWxConfig() {
 
 function getWxConfig(currentUrl) {
   // https://wx.yvan.top/wechat-sign?url=currentUrl
-  let url = encodeURIComponent(currentUrl)
+  let url = encodeURIComponent(currentUrl);
   return fetch(`https://wx.yvan.top/wechat-sign?url=${url}`)
-  .then(response => response.json())
-  .catch(error => console.error('Error:', error))
-  .then(response => console.log('Success:', response));;
+    .then(response => response.json())
+    .catch(error => console.error('Error:', error))
+    //.then(response => response);
 }
 
 export function setShare() {
