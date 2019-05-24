@@ -5,19 +5,16 @@ FROM node:alpine AS build
 # Create app directory
 WORKDIR /usr/src/app
 
-# https://github.com/yarnpkg/yarn/issues/749
-COPY package.json yarn.lock ./
-
-# RUN yarn config set registry http://registry.npm.taobao.org
-# RUN yarn config set sass-binary-site http://npm.taobao.org/mirrors/node-sass
+#
+COPY package*.json ./
 
 # install ALL node_modules, including 'devDependencies'
-RUN yarn install --frozen-lockfile --no-cache
+RUN npm install
 
 # Bundle app source
 COPY . .
 
-RUN yarn build
+RUN npm run build
 
 #
 # ---- Release ----
